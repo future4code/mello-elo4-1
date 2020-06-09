@@ -5,12 +5,12 @@ const MainContainer = styled.div`
     border: 1px solid blue;
 `
 
-class ProductDetail extends React.Component {
+class ProductDetails extends React.Component {
   state = {};
 
   render() {
-    return <MainContainer>ProductDetail</MainContainer>;
+    return <MainContainer>ProductDetails</MainContainer>;
   }
 }
 
-export default ProductDetail;
+export default ProductDetails;

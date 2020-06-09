@@ -15,7 +15,7 @@ const Categories = styled.div`
 
 const Products = styled.div``
 
-class ProductGrid extends React.Component {
+class ProductsGrid extends React.Component {
   state = {};
 
   render() {
@@ -28,4 +28,4 @@ class ProductGrid extends React.Component {
   }
 }
 
-export default ProductGrid;
+export default ProductsGrid;

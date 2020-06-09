@@ -4,8 +4,8 @@ import HeaderLogo from "./HeaderLogo/HeaderLogo";
 import HeaderSearch from "./HeaderSearch/HeaderSearch";
 import Footer from "./Footer/Footer";
 import LoginPage from "./LoginPage/LoginPage";
-import ProductGrid from "./ProductGrid/ProductGrid";
-import ProductDetail from "./ProductDetail/ProductDetail";
+import ProductsGrid from "./ProductsGrid/ProductsGrid";
+import ProductDetails from "./ProductDetails/ProductDetails";
 import Cart from "./Cart/Cart";
 import SupplierList from "./SupplierList/SupplierList";
 import AddProduct from "./AddProduct/AddProduct";
@@ -28,10 +28,10 @@ export class AppContainer extends Component {
     switch (this.state.displayPage) {
       case "login":
         return <LoginPage />;
-      case "productGrid":
-        return <ProductGrid />;
-      case "productDetail":
-        return <ProductDetail />;
+      case "productsGrid":
+        return <ProductsGrid />;
+      case "productDetails":
+        return <ProductDetails />;
       case "cart":
         return <Cart />;
       case "supplierList":
@@ -45,8 +45,8 @@ export class AppContainer extends Component {
 
   renderHeader = () => {
     if (
-      this.state.displayPage === "productGrid" ||
-      this.state.displayPage === "productDetail" ||
+      this.state.displayPage === "productsGrid" ||
+      this.state.displayPage === "productDetails" ||
       this.state.displayPage === "cart"
     ) {
       return <HeaderSearch />;
@@ -62,8 +62,8 @@ export class AppContainer extends Component {
   selectTest = (
     <select onChange={this.handleSelecTest}>
       <option value="login">login</option>
-      <option value="productGrid">productGrid</option>
-      <option value="productDetail">productDetail</option>
+      <option value="productsGrid">productsGrid</option>
+      <option value="productDetails">productDetails</option>
       <option value="cart">cart</option>
       <option value="supplierList">supplierList</option>
       <option value="addProduct">addProduct</option>

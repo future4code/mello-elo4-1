@@ -1,9 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const MainContainer = styled.div`
-    border: 1px solid green;
-`
+import { MainContainer } from "./styled";
 
 class HeaderLogo extends React.Component {
   state = {};

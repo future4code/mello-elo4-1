@@ -1,9 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const MainContainer = styled.div`
-    border: 1px solid blue;
-`
+import { MainContainer } from "./styled";
 
 class ProductDetails extends React.Component {
   state = {};

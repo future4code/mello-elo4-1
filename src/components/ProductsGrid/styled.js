@@ -12,3 +12,8 @@ export const Categories = styled(Grid)`
 export const Products = styled(Grid)`
   border: 1px solid yellow;
 `;
+
+
+export const ProductCard = styled(Grid)`
+
+`

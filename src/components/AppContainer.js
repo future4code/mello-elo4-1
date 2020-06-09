@@ -36,6 +36,14 @@ export class AppContainer extends Component {
     this.setState({ category: name });
   };
 
+  setMinPrice = (value) => {
+    this.setState({ minPrice: value });
+  };
+
+  setMaxPrice = (value) => {
+    this.setState({ maxPrice: value });
+  };
+
   getAllProducts = async () => {
     try {
       const response = await axios.get(urlElo4);
@@ -52,7 +60,8 @@ export class AppContainer extends Component {
     let filteredProducts = this.state.products;
     if (this.state.category) {
       filteredProducts = filteredProducts.filter(
-        (item) => item.category.toLowerCase() === this.state.category.toLowerCase()
+        (item) =>
+          item.category.toLowerCase() === this.state.category.toLowerCase()
       );
     }
     if (this.state.minPrice) {
@@ -82,6 +91,9 @@ export class AppContainer extends Component {
           <ProductsGrid
             products={this.filterSearchProducts()}
             setCategory={this.setCategory}
+            minPrice={this.state.minPrice}
+            setMinPrice={this.setMinPrice}
+            setMaxPrice={this.setMaxPrice}
           />
         );
       case "productDetails":

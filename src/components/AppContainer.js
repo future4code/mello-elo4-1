@@ -7,7 +7,6 @@ import LoginPage from "./LoginPage/LoginPage";
 import ProductsGrid from "./ProductsGrid/ProductsGrid";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import Cart from "./Cart/Cart";
-import SupplierList from "./SupplierList/SupplierList";
 import AddProduct from "./AddProduct/AddProduct";
 
 const MainContainer = styled.div`
@@ -34,8 +33,6 @@ export class AppContainer extends Component {
         return <ProductDetails />;
       case "cart":
         return <Cart />;
-      case "supplierList":
-        return <SupplierList />;
       case "addProduct":
         return <AddProduct />;
       default:
@@ -55,17 +52,17 @@ export class AppContainer extends Component {
     }
   };
 
+
+  // Isso eh soh para mudarmos de pagina no teste, vai ser excluido
   handleSelecTest = (e) => {
     this.setState({ displayPage: e.target.value });
   };
-
   selectTest = (
     <select onChange={this.handleSelecTest}>
       <option value="login">login</option>
       <option value="productsGrid">productsGrid</option>
       <option value="productDetails">productDetails</option>
       <option value="cart">cart</option>
-      <option value="supplierList">supplierList</option>
       <option value="addProduct">addProduct</option>
     </select>
   );

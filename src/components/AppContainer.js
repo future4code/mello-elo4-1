@@ -8,6 +8,10 @@ import ProductsGrid from "./ProductsGrid/ProductsGrid";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import Cart from "./Cart/Cart";
 import AddProduct from "./AddProduct/AddProduct";
+import axios from "axios";
+
+const urlElo4 =
+  "https://us-central1-labenu-apis.cloudfunctions.net/eloFourOne/products";
 
 const MainContainer = styled.div`
   display: grid;
@@ -20,7 +24,53 @@ const MainContainer = styled.div`
 
 export class AppContainer extends Component {
   state = {
-    displayPage: "login", // Opcoes: login, productGrid, productDetail, cart, supplierList, addProduct
+    displayPage: "productsGrid", // Opcoes: login, productGrid, productDetail, cart, supplierList, addProduct
+    products: [],
+    category: "",
+    minPrice: 0,
+    maxPrice: 0,
+    searchInput: "",
+  };
+
+  setCategory = (name) => {
+    this.setState({ category: name });
+  };
+
+  getAllProducts = async () => {
+    try {
+      const response = await axios.get(urlElo4);
+      this.setState({ products: response.data.products });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  componentDidMount() {
+    this.getAllProducts();
+  }
+
+  filterSearchProducts = () => {
+    let filteredProducts = this.state.products;
+    if (this.state.category) {
+      filteredProducts = filteredProducts.filter(
+        (item) => item.category.toLowerCase() === this.state.category.toLowerCase()
+      );
+    }
+    if (this.state.minPrice) {
+      filteredProducts = filteredProducts.filter(
+        (item) => item.price >= this.state.minPrice
+      );
+    }
+    if (this.state.maxPrice) {
+      filteredProducts = filteredProducts.filter(
+        (item) => item.price <= this.state.maxPrice
+      );
+    }
+    if (this.state.searchInput) {
+      filteredProducts = filteredProducts.filter((item) =>
+        item.name.toLowerCase().includes(this.state.searchInput.toLowerCase())
+      );
+    }
+    return filteredProducts;
   };
 
   renderComponent = () => {
@@ -28,7 +78,12 @@ export class AppContainer extends Component {
       case "login":
         return <LoginPage />;
       case "productsGrid":
-        return <ProductsGrid />;
+        return (
+          <ProductsGrid
+            products={this.filterSearchProducts()}
+            setCategory={this.setCategory}
+          />
+        );
       case "productDetails":
         return <ProductDetails />;
       case "cart":
@@ -52,13 +107,12 @@ export class AppContainer extends Component {
     }
   };
 
-
   // Isso eh soh para mudarmos de pagina no teste, vai ser excluido
   handleSelecTest = (e) => {
     this.setState({ displayPage: e.target.value });
   };
   selectTest = (
-    <select onChange={this.handleSelecTest}>
+    <select defaultValue={"productsGrid"} onChange={this.handleSelecTest}>
       <option value="login">login</option>
       <option value="productsGrid">productsGrid</option>
       <option value="productDetails">productDetails</option>

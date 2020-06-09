@@ -43,6 +43,18 @@ export class AppContainer extends Component {
     }
   };
 
+  renderHeader = () => {
+    if (
+      this.state.displayPage === "productGrid" ||
+      this.state.displayPage === "productDetail" ||
+      this.state.displayPage === "cart"
+    ) {
+      return <HeaderSearch />;
+    } else {
+      return <HeaderLogo />;
+    }
+  };
+
   handleSelecTest = (e) => {
     this.setState({ displayPage: e.target.value });
   };
@@ -60,20 +72,16 @@ export class AppContainer extends Component {
 
   render() {
     return (
+      // as duas linhas abaixo sao para teste e serao apagadas
       <div>
         {this.selectTest}
         <MainContainer>
-          {this.state.displayPage === "productGrid" ||
-          this.state.displayPage === "productDetail" ||
-          this.state.displayPage === "cart" ? (
-            <HeaderSearch />
-          ) : (
-            <HeaderLogo />
-          )}
+          {this.renderHeader()}
           {this.renderComponent()}
           <Footer />
         </MainContainer>
       </div>
+      // a linha acima tbm eh do selectTest
     );
   }
 }

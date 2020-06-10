@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const MainContainer = styled.div`
   width: 250px;
+  height: 250px;
   border: 1px solid blue;
   margin: 5px;
 `;
@@ -19,7 +20,7 @@ function ProductCard(props) {
     <MainContainer>
       <img
         src={product.photos[0]}
-        style={{ width: "100%" }}
+        style={{ width: "100%",height:"80%" }}
         alt={`Imagem do produto ${product.name}`}
       />
       <div

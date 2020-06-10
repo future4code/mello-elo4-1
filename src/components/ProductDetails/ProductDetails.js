@@ -33,58 +33,60 @@ const mainTheme = createMuiTheme({
 });
 
 function ProductDetails(props) {
-  const { product } = props;
+  const { product, changePage } = props;
 
-  return (!product ? "oi" :
-    <MainContainer>
-      <h1>{product.name}</h1>
-      <HyperlinkContainer>
-        <SectionLink onClick={() => this.props.changePage("login")}>
-          Página inicial
-        </SectionLink>{" "}
-        <Arrow /> <SectionLink>{product.category}</SectionLink> <Arrow />{" "}
-        <SectionLink>{product.name}</SectionLink>
-      </HyperlinkContainer>
-      <DetailsContainer>
-        <ProductContainer>
-          <ProductImage src={product.photos[0]} alt="" />
-        </ProductContainer>
-        <Sidebar>
-          <Product>
-            <ProductParagraph>
-              <Category />
-              {product.category}
-            </ProductParagraph>
-          </Product>
-          <Product>
-            <ProductParagraph>
-              <LocalOffer />
-              {product.name}
-            </ProductParagraph>
-          </Product>
-          <Product>
-            <ProductParagraph>
-              <Money />
-              R${product.price}
-            </ProductParagraph>
-          </Product>
-          <Product>
-            <ProductParagraph>
-              <Payments />
-              Método de pagamento: {product.paymentMethod}
-            </ProductParagraph>
-          </Product>
-          <Product>
-            <ProductParagraph>
-              <Installments />
-              Parcelado em {product.installments} vezes.
-            </ProductParagraph>
-          </Product>
-        </Sidebar>
-      </DetailsContainer>
-      <h3>Informações do produto</h3>
-      <DescriptionContainer>{product.description}</DescriptionContainer>
-    </MainContainer>
+  return (
+    product && (
+      <MainContainer>
+        <h1>{product.name}</h1>
+        <HyperlinkContainer>
+          <SectionLink onClick={() => changePage("productsGrid")}>
+            Página inicial
+          </SectionLink>{" "}
+          <Arrow /> <SectionLink>{product.category}</SectionLink> <Arrow />{" "}
+          <SectionLink>{product.name}</SectionLink>
+        </HyperlinkContainer>
+        <DetailsContainer>
+          <ProductContainer>
+            <ProductImage src={product.photos[0]} alt="" />
+          </ProductContainer>
+          <Sidebar>
+            <Product>
+              <ProductParagraph>
+                <Category />
+                {product.category}
+              </ProductParagraph>
+            </Product>
+            <Product>
+              <ProductParagraph>
+                <LocalOffer />
+                {product.name}
+              </ProductParagraph>
+            </Product>
+            <Product>
+              <ProductParagraph>
+                <Money />
+                R${product.price}
+              </ProductParagraph>
+            </Product>
+            <Product>
+              <ProductParagraph>
+                <Payments />
+                Método de pagamento: {product.paymentMethod}
+              </ProductParagraph>
+            </Product>
+            <Product>
+              <ProductParagraph>
+                <Installments />
+                Parcelado em {product.installments} vezes.
+              </ProductParagraph>
+            </Product>
+          </Sidebar>
+        </DetailsContainer>
+        <h3>Informações do produto</h3>
+        <DescriptionContainer>{product.description}</DescriptionContainer>
+      </MainContainer>
+    )
   );
 }
 

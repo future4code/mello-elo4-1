@@ -47,9 +47,14 @@ export class AppContainer extends Component {
     this.getAllProducts();
   }
 
-  changePage = (page)=>{
-    this.setState({displayPage: page})
-  }
+  removeFromCart = (id) => {
+    const newCart = this.state.cart.filter((product) => product.id !== id);
+    this.setState({ cart: newCart });
+  };
+
+  changePage = (page) => {
+    this.setState({ displayPage: page });
+  };
 
   setCategory = (name) => {
     this.setState({ category: name });
@@ -135,7 +140,7 @@ export class AppContainer extends Component {
   renderComponent = () => {
     switch (this.state.displayPage) {
       case "login":
-        return <LoginPage changePage={this.changePage}/>;
+        return <LoginPage changePage={this.changePage} />;
       case "productsGrid":
         return (
           <ProductsGrid
@@ -150,9 +155,11 @@ export class AppContainer extends Component {
           />
         );
       case "productDetails":
-        return <ProductDetails product={this.state.selectedProduct}/>;
+        return <ProductDetails product={this.state.selectedProduct} />;
       case "cart":
-        return <Cart />;
+        return (
+          <Cart cart={this.state.cart} removeFromCart={this.removeFromCart} />
+        );
       case "addProduct":
         return <AddProduct />;
       default:

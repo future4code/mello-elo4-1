@@ -145,11 +145,12 @@ export class AppContainer extends Component {
             setMaxPrice={this.setMaxPrice}
             setSort={this.setSortOption}
             setSelectedProduct={this.setSelectedProduct}
+            changePage={this.changePage}
             addProductToCart={this.addProductToCart}
           />
         );
       case "productDetails":
-        return <ProductDetails />;
+        return <ProductDetails product={this.state.selectedProduct}/>;
       case "cart":
         return <Cart />;
       case "addProduct":

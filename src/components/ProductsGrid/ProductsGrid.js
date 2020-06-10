@@ -41,6 +41,7 @@ function ProductsGrid(props) {
     setMaxPrice,
     setSort,
     setSelectedProduct,
+    changePage,
     addProductToCart,
   } = props;
 
@@ -49,6 +50,7 @@ function ProductsGrid(props) {
       key={item.id}
       product={item}
       setSelectedProduct={setSelectedProduct}
+      changePage={changePage}
       addProductToCart={addProductToCart}
     />
   ));

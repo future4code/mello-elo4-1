@@ -16,8 +16,8 @@ const urlElo4 =
 const MainContainer = styled.div`
   display: grid;
   grid-template-rows: 100px 1fr 80px;
-  width: 90vw;
-  height: 90vh;
+  width: 100%;
+  height: 100%;
   margin: auto;
   margin-top: 20px;
 `;
@@ -26,6 +26,7 @@ export class AppContainer extends Component {
   state = {
     displayPage: "productsGrid", // Opcoes: login, productGrid, productDetail, cart, supplierList, addProduct
     products: [],
+    cart: [],
     category: "",
     minPrice: 0,
     maxPrice: 0,
@@ -33,6 +34,18 @@ export class AppContainer extends Component {
     selectedProduct: undefined,
     sortOption: "",
   };
+
+  getAllProducts = async () => {
+    try {
+      const response = await axios.get(urlElo4);
+      this.setState({ products: response.data.products });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  componentDidMount() {
+    this.getAllProducts();
+  }
 
   setCategory = (name) => {
     this.setState({ category: name });
@@ -50,25 +63,20 @@ export class AppContainer extends Component {
     this.setState({ searchInput: value });
   };
 
-  setSelectedProduct = (product) => {
-    this.setState({ selectedProduct: product });
-  };
-
   setSortOption = (value) => {
     this.setState({ sortOption: value });
   };
 
-  getAllProducts = async () => {
-    try {
-      const response = await axios.get(urlElo4);
-      this.setState({ products: response.data.products });
-    } catch (err) {
-      console.log(err);
-    }
+  setSelectedProduct = (product) => {
+    this.setState({ selectedProduct: product });
+    console.table(product)
   };
-  componentDidMount() {
-    this.getAllProducts();
-  }
+
+  addProductToCart = (product) => {
+    const newCart = [...this.state.cart, product];
+    this.setState({ cart: newCart });
+    console.table(newCart);
+  };
 
   filterSearchSortProducts = () => {
     let filteredProducts = this.state.products;
@@ -134,6 +142,8 @@ export class AppContainer extends Component {
             setMinPrice={this.setMinPrice}
             setMaxPrice={this.setMaxPrice}
             setSort={this.setSortOption}
+            setSelectedProduct={this.setSelectedProduct}
+            addProductToCart={this.addProductToCart}
           />
         );
       case "productDetails":

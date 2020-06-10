@@ -6,6 +6,8 @@ import styled from "styled-components";
 const MainContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 4fr;
+  width: 98%;
+  margin: auto;
 `;
 
 const CategoriesContainer = styled.div`
@@ -13,8 +15,7 @@ const CategoriesContainer = styled.div`
   flex-direction: column;
 `;
 
-const Scroll = styled.div`
-`;
+const Scroll = styled.div``;
 
 const SelectContainer = styled.div`
   display: flex;
@@ -33,10 +34,23 @@ const ProductsContainer = styled.div`
 `;
 
 function ProductsGrid(props) {
-  const { products, setCategory, setMinPrice, setMaxPrice, setSort } = props;
+  const {
+    products,
+    setCategory,
+    setMinPrice,
+    setMaxPrice,
+    setSort,
+    setSelectedProduct,
+    addProductToCart,
+  } = props;
 
   const renderedProducts = products.map((item) => (
-    <ProductCard key={item.id} product={item} />
+    <ProductCard
+      key={item.id}
+      product={item}
+      setSelectedProduct={setSelectedProduct}
+      addProductToCart={addProductToCart}
+    />
   ));
 
   const renderedCategories = products
@@ -47,7 +61,6 @@ function ProductsGrid(props) {
     .map((item) => (
       <div
         key={item.id}
-        item
         onClick={() => {
           setCategory(item.category);
         }}
@@ -88,7 +101,7 @@ function ProductsGrid(props) {
         </Grid>
       </CategoriesContainer>
       {/* Fim categorias */}
-      <Scroll>
+      <div>
         <SelectContainer>
           <p>Produtos encontrados: {products.length}</p>
           <select
@@ -107,8 +120,10 @@ function ProductsGrid(props) {
             <option value="priceDec">Preco decrescente</option>
           </select>
         </SelectContainer>
-        <ProductsContainer>{renderedProducts}</ProductsContainer>
-      </Scroll>
+        <Scroll>
+          <ProductsContainer>{renderedProducts}</ProductsContainer>
+        </Scroll>
+      </div>
     </MainContainer>
   );
 }

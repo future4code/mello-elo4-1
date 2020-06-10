@@ -8,10 +8,10 @@ const MainContainer = styled.div`
 `;
 
 function ProductCard(props) {
-  const { product } = props;
+  const { product, setSelectedProduct,addProductToCart } = props;
   return (
     <MainContainer>
-      <img src={product.photos[0]} style={{ width: "100%" }} />
+      <img src={product.photos[0]} style={{ width: "100%" }} alt={`Imagem do produto ${product.name}`}/>
       <div
         style={{
           display: "flex",
@@ -23,8 +23,8 @@ function ProductCard(props) {
           <span>{`R$ ${product.price.toFixed(2)}`}</span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <button>Detalhes</button>
-          <button>Adicionar ao carrinho</button>
+          <button onClick={()=>{setSelectedProduct(product)}}>Detalhes</button>
+          <button onClick={()=>{addProductToCart(product)}}>Adicionar ao carrinho</button>
         </div>
       </div>
     </MainContainer>

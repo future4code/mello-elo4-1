@@ -56,7 +56,7 @@ function ProductDetails(props) {
         </HyperlinkContainer>
         <DetailsContainer>
           <ProductContainer>
-            <ProductImage src={product.photos[0]} alt="" />
+            <ProductImage src={product.photos[0]} alt={`Imagem do produto ${product.name}`} />
           </ProductContainer>
           <Sidebar>
             <Product>

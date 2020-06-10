@@ -30,6 +30,8 @@ export class AppContainer extends Component {
     minPrice: 0,
     maxPrice: 0,
     searchInput: "",
+    selectedProduct: undefined,
+    sortOption: "",
   };
 
   setCategory = (name) => {
@@ -44,6 +46,18 @@ export class AppContainer extends Component {
     this.setState({ maxPrice: value });
   };
 
+  setSearchInput = (value) => {
+    this.setState({ searchInput: value });
+  };
+
+  setSelectedProduct = (product) => {
+    this.setState({ selectedProduct: product });
+  };
+
+  setSortOption = (value) => {
+    this.setState({ sortOption: value });
+  };
+
   getAllProducts = async () => {
     try {
       const response = await axios.get(urlElo4);
@@ -56,7 +70,7 @@ export class AppContainer extends Component {
     this.getAllProducts();
   }
 
-  filterSearchProducts = () => {
+  filterSearchSortProducts = () => {
     let filteredProducts = this.state.products;
     if (this.state.category) {
       filteredProducts = filteredProducts.filter(
@@ -79,6 +93,32 @@ export class AppContainer extends Component {
         item.name.toLowerCase().includes(this.state.searchInput.toLowerCase())
       );
     }
+    if (this.state.sortOption === "nameAsc") {
+      filteredProducts.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+      );
+    }
+    if (this.state.sortOption === "nameDec") {
+      filteredProducts.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1
+      );
+    }
+    if (this.state.sortOption === "categoryAsc") {
+      filteredProducts.sort((a, b) =>
+        a.category.toLowerCase() > b.category.toLowerCase() ? 1 : -1
+      );
+    }
+    if (this.state.sortOption === "categoryDec") {
+      filteredProducts.sort((a, b) =>
+        a.category.toLowerCase() > b.category.toLowerCase() ? -1 : 1
+      );
+    }
+    if (this.state.sortOption === "priceAsc") {
+      filteredProducts.sort((a, b) => a.price - b.price);
+    }
+    if (this.state.sortOption === "priceDec") {
+      filteredProducts.sort((a, b) => b.price - a.price);
+    }
     return filteredProducts;
   };
 
@@ -89,11 +129,11 @@ export class AppContainer extends Component {
       case "productsGrid":
         return (
           <ProductsGrid
-            products={this.filterSearchProducts()}
+            products={this.filterSearchSortProducts()}
             setCategory={this.setCategory}
-            minPrice={this.state.minPrice}
             setMinPrice={this.setMinPrice}
             setMaxPrice={this.setMaxPrice}
+            setSort={this.setSortOption}
           />
         );
       case "productDetails":
@@ -113,7 +153,7 @@ export class AppContainer extends Component {
       this.state.displayPage === "productDetails" ||
       this.state.displayPage === "cart"
     ) {
-      return <HeaderSearch />;
+      return <HeaderSearch setSearchInput={this.setSearchInput} />;
     } else {
       return <HeaderLogo />;
     }

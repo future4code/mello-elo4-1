@@ -1,12 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const MainContainer = styled.div`
-  width: 250px;
-  height: 250px;
-  border: 1px solid blue;
-  margin: 5px;
-`;
+import { MainContainer } from "./styled";
 
 function ProductCard(props) {
   const { product, setSelectedProduct, changePage, addProductToCart } = props;
@@ -20,7 +13,7 @@ function ProductCard(props) {
     <MainContainer>
       <img
         src={product.photos[0]}
-        style={{ width: "100%",height:"80%" }}
+        style={{ width: "100%", height: "80%" }}
         alt={`Imagem do produto ${product.name}`}
       />
       <div

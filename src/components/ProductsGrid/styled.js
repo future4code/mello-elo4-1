@@ -1,14 +1,31 @@
 import styled from "styled-components";
-import { Grid } from "@material-ui/core";
 
-export const MainContainer = styled(Grid)``;
-
-// Aqui vamos mudar pro import { Grid } from '@material-ui/core';
-export const Categories = styled(Grid)`
-  border: 1px solid blue;
+export const MainContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  width: 98%;
+  margin: auto;
 `;
 
-// Aqui vamos mudar pro import { Grid } from '@material-ui/core';
-export const Products = styled(Grid)`
-  border: 1px solid yellow;
+export const CategoriesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Scroll = styled.div``;
+
+export const SelectContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid red;
+  height: 30px;
+  align-items: center;
+`;
+
+export const ProductsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  min-height: 100%;
+  flex-wrap: wrap;
 `;

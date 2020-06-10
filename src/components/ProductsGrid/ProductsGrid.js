@@ -1,37 +1,15 @@
 import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
-import { Grid, TextField } from "@material-ui/core";
-import styled from "styled-components";
+import { TextField } from "@material-ui/core";
+import {
+  MainContainer,
+  CategoriesContainer,
+  Scroll,
+  SelectContainer,
+  ProductsContainer,
+} from "./styled";
 
-const MainContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  width: 98%;
-  margin: auto;
-`;
 
-const CategoriesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Scroll = styled.div``;
-
-const SelectContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  border: 1px solid red;
-  height: 30px;
-  align-items: center;
-`;
-
-const ProductsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  min-height: 100%;
-  flex-wrap: wrap;
-`;
 
 function ProductsGrid(props) {
   const {
@@ -93,14 +71,14 @@ function ProductsGrid(props) {
           }}
         />
         {renderedCategories}
-        <Grid
+        <div
           item
           onClick={() => {
             setCategory("");
           }}
         >
           Voltar
-        </Grid>
+        </div>
       </CategoriesContainer>
       {/* Fim categorias */}
       <div>

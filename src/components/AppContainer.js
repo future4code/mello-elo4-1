@@ -155,7 +155,12 @@ export class AppContainer extends Component {
           />
         );
       case "productDetails":
-        return <ProductDetails product={this.state.selectedProduct} changePage={this.changePage}/>;
+        return (
+          <ProductDetails
+            product={this.state.selectedProduct}
+            changePage={this.changePage}
+          />
+        );
       case "cart":
         return (
           <Cart cart={this.state.cart} removeFromCart={this.removeFromCart} />

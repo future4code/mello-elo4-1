@@ -47,6 +47,10 @@ export class AppContainer extends Component {
     this.getAllProducts();
   }
 
+  changePage = (page)=>{
+    this.setState({displayPage: page})
+  }
+
   setCategory = (name) => {
     this.setState({ category: name });
   };
@@ -131,7 +135,7 @@ export class AppContainer extends Component {
   renderComponent = () => {
     switch (this.state.displayPage) {
       case "login":
-        return <LoginPage />;
+        return <LoginPage changePage={this.changePage}/>;
       case "productsGrid":
         return (
           <ProductsGrid

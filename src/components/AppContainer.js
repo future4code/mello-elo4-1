@@ -69,13 +69,11 @@ export class AppContainer extends Component {
 
   setSelectedProduct = (product) => {
     this.setState({ selectedProduct: product });
-    console.table(product)
   };
 
   addProductToCart = (product) => {
     const newCart = [...this.state.cart, product];
     this.setState({ cart: newCart });
-    console.table(newCart);
   };
 
   filterSearchSortProducts = () => {

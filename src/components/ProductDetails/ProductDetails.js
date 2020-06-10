@@ -33,7 +33,7 @@ const mainTheme = createMuiTheme({
 });
 
 function ProductDetails(props) {
-  const { product, changePage } = props;
+  const { product, changePage, setCategory } = props;
 
   return (
     product && (
@@ -43,8 +43,16 @@ function ProductDetails(props) {
           <SectionLink onClick={() => changePage("productsGrid")}>
             Página inicial
           </SectionLink>{" "}
-          <Arrow /> <SectionLink>{product.category}</SectionLink> <Arrow />{" "}
-          <SectionLink>{product.name}</SectionLink>
+          <Arrow />{" "}
+          <SectionLink
+            onClick={() => {
+              setCategory(product.category);
+              changePage("productsGrid");
+            }}
+          >
+            {product.category}
+          </SectionLink>{" "}
+          <Arrow /> <SectionLink>{product.name}</SectionLink>
         </HyperlinkContainer>
         <DetailsContainer>
           <ProductContainer>

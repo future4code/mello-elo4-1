@@ -159,6 +159,7 @@ export class AppContainer extends Component {
           <ProductDetails
             product={this.state.selectedProduct}
             changePage={this.changePage}
+            setCategory={this.setCategory}
           />
         );
       case "cart":

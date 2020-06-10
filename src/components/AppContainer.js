@@ -17,7 +17,7 @@ const MainContainer = styled.div`
   display: grid;
   grid-template-rows: 100px 1fr 80px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: auto;
   margin-top: 20px;
 `;

@@ -11,6 +11,7 @@ export const MainContainer = styled.div`
 export const CategoriesContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
 `;
 
 export const SelectContainer = styled.div`

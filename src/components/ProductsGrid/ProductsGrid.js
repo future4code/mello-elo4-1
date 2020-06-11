@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { TextField } from "@material-ui/core";
 import {
@@ -9,6 +9,8 @@ import {
   ProductsContainer,
   Category,
 } from "./styled";
+import ProductCardMaterial from "../ProductCardMaterial/ProductCardMaterial";
+
 
 function ProductsGrid(props) {
   const {
@@ -26,7 +28,7 @@ function ProductsGrid(props) {
   const renderedProducts = products.map((item) => {
     max = item.price > max ? (max = item.price) : max;
     return (
-      <ProductCard
+      <ProductCardMaterial
         key={item.id}
         product={item}
         setSelectedProduct={setSelectedProduct}

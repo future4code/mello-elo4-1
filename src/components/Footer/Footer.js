@@ -5,6 +5,7 @@ import {
   SocialMediaIcon,
   SocialMediaContainer,
   ListFooter,
+  H4,
 } from "./styled";
 
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
@@ -31,7 +32,7 @@ function Footer(props) {
     <MuiThemeProvider theme={mainTheme}>
       <MainContainer>
         <ListFooter>
-          <h4>Redes Sociais</h4>
+          <H4>Redes Sociais</H4>
           <SocialMediaContainer>
             <ListItemFooter>
               <SocialMediaIcon src="https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/01-512.png" />
@@ -51,9 +52,9 @@ function Footer(props) {
           </SocialMediaContainer>
         </ListFooter>
         <ListFooter>
-          <h4>Newsletter</h4>
+          <H4>Newsletter</H4>
           <ListItemFooter>
-            Receba novidades personalizadas no seu e-mail
+            Receba novidades personalizadas
           </ListItemFooter>
           <ListItemFooter>
             <Input type="email" placeholder="digite aqui seu email"></Input>
@@ -61,6 +62,7 @@ function Footer(props) {
               size="small"
               variant="outlined"
               color="primary"
+              style={{marginTop:"2px"}}
               onClick={() => alert("E-mail enviado com sucesso!")}
             >
               Assinar
@@ -68,18 +70,18 @@ function Footer(props) {
           </ListItemFooter>
         </ListFooter>
         <ListFooter>
-          <h4>Métodos de pagamento</h4>
+          <H4>Métodos de pagamento</H4>
           <img src={PaymentMethodsPicture} alt="" />
         </ListFooter>
         <ListFooter>
-          <h4>Deixe-nos ajudá-lo</h4>
+          <H4>Deixe-nos ajudá-lo</H4>
           <ListItemFooter>Sua conta</ListItemFooter>
           <ListItemFooter>Devoluções e reembolsos</ListItemFooter>
           <ListItemFooter>Ajuda</ListItemFooter>
           <ListItemFooter>SAC</ListItemFooter>
         </ListFooter>
         <ListFooter>
-          <h4>Feito por</h4>
+          <H4>Feito por</H4>
           <ListItemFooter>{teamName}</ListItemFooter>
         </ListFooter>
       </MainContainer>

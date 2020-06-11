@@ -36,7 +36,7 @@ function ProductDetails(props) {
   const { product, changePage, setCategory } = props;
 
   return (
-    product && (
+    product ? (
       <MainContainer>
         <h1>{product.name}</h1>
         <HyperlinkContainer>
@@ -94,7 +94,7 @@ function ProductDetails(props) {
         <h3>Informações do produto</h3>
         <DescriptionContainer>{product.description}</DescriptionContainer>
       </MainContainer>
-    )
+    ) : null
   );
 }
 

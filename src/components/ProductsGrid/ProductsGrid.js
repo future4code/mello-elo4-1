@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { TextField } from "@material-ui/core";
 import {
@@ -7,9 +7,8 @@ import {
   Scroll,
   SelectContainer,
   ProductsContainer,
+  Category,
 } from "./styled";
-
-
 
 function ProductsGrid(props) {
   const {
@@ -23,30 +22,37 @@ function ProductsGrid(props) {
     addProductToCart,
   } = props;
 
-  const renderedProducts = products.map((item) => (
-    <ProductCard
-      key={item.id}
-      product={item}
-      setSelectedProduct={setSelectedProduct}
-      changePage={changePage}
-      addProductToCart={addProductToCart}
-    />
-  ));
+  let max = 0;
+  const renderedProducts = products.map((item) => {
+    max = item.price > max ? (max = item.price) : max;
+    return (
+      <ProductCard
+        key={item.id}
+        product={item}
+        setSelectedProduct={setSelectedProduct}
+        changePage={changePage}
+        addProductToCart={addProductToCart}
+      />
+    );
+  });
 
   const renderedCategories = products
     .filter(
       (product, index, array) =>
         array.findIndex((item) => item.category === product.category) === index
     )
+    .sort((a, b) =>
+      a.category.toLowerCase() > b.category.toLowerCase() ? 1 : -1
+    )
     .map((item) => (
-      <div
+      <Category
         key={item.id}
         onClick={() => {
           setCategory(item.category);
         }}
       >
         {item.category}
-      </div>
+      </Category>
     ));
 
   return (
@@ -57,7 +63,8 @@ function ProductsGrid(props) {
           label="Min"
           type="number"
           fullWidth
-          defaultValue={0}
+          defaultValue={1}
+          // inputProps={{ min: "0", max: max, step: "1" }}
           onChange={(e) => {
             setMinPrice(e.target.value);
           }}
@@ -65,19 +72,20 @@ function ProductsGrid(props) {
         <TextField
           label="Max"
           type="number"
-          defaultValue={100}
+          defaultValue={60} // Nao esta funcionando =/
+          // inputProps={{ min: "0", max: max, step: "1" }}
           onChange={(e) => {
             setMaxPrice(e.target.value);
           }}
         />
         {renderedCategories}
         <div
-          item
+          style={{ cursor: "pointer", marginTop: "5px" }}
           onClick={() => {
             setCategory("");
           }}
         >
-          Voltar
+          Todas
         </div>
       </CategoriesContainer>
       {/* Fim categorias */}

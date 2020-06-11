@@ -15,11 +15,10 @@ const urlElo4 =
 
 const MainContainer = styled.div`
   display: grid;
-  grid-template-rows: 100px 1fr 80px;
+  grid-template-rows: 100px 1fr 200px;
   width: 100%;
   height: 100vh;
-  margin: auto;
-  margin-top: 20px;
+  gap: 10px;
 `;
 
 export class AppContainer extends Component {

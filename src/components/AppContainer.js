@@ -21,6 +21,9 @@ const MainContainer = styled.div`
   gap: 10px;
 `;
 
+let defaultMaxPrice = 0;
+let defaultMinPrice = 0;
+
 export class AppContainer extends Component {
   state = {
     displayPage: "productsGrid", // Opcoes: login, productGrid, productDetail, cart, supplierList, addProduct
@@ -37,7 +40,18 @@ export class AppContainer extends Component {
   getAllProducts = async () => {
     try {
       const response = await axios.get(urlElo4);
-      this.setState({ products: response.data.products });
+      response.data.products.forEach((item) => {
+        defaultMaxPrice =
+          item.price > defaultMaxPrice ? item.price : defaultMaxPrice;
+      });
+      defaultMinPrice = defaultMaxPrice;
+      response.data.products.forEach((item) => {
+        defaultMinPrice =
+          item.price < defaultMinPrice ? item.price : defaultMinPrice;
+      });
+      this.setState({
+        products: response.data.products,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -147,6 +161,8 @@ export class AppContainer extends Component {
             setCategory={this.setCategory}
             setMinPrice={this.setMinPrice}
             setMaxPrice={this.setMaxPrice}
+            defaultMaxPrice={defaultMaxPrice}
+            defaultMinPrice={defaultMinPrice}
             setSort={this.setSortOption}
             setSelectedProduct={this.setSelectedProduct}
             changePage={this.changePage}

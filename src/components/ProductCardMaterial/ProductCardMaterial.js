@@ -26,7 +26,14 @@ function ProductCardMaterial(props) {
   }
 
   return (
-    <Card style={{ width: "250px", height: "300px", marginTop: "15px" }}>
+    <Card
+      style={{
+        width: "250px",
+        height: "300px",
+        marginTop: "15px",
+        marginRight: "15px",
+      }}
+    >
       <CardActionArea
         onClick={() => {
           showProductDetails(product);
@@ -36,7 +43,7 @@ function ProductCardMaterial(props) {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Typography
               gutterBottom
-              variant="h7"
+              variant="inherit"
               component="h3"
               style={{ marginBottom: "0px", marginTop: "0px" }}
             >
@@ -44,23 +51,31 @@ function ProductCardMaterial(props) {
             </Typography>
             <Typography
               gutterBottom
-              variant="h7"
-              component="h3"
+              variant="inherit"
+              component="h4"
               style={{ marginBottom: "0px", marginTop: "0px" }}
             >
               {`R$ ${product.price.toFixed(2)}`}
             </Typography>
           </div>
+          <Typography
+            gutterBottom
+            variant="subtitle2"
+            style={{ marginBottom: "0px", marginTop: "0px", opacity: "70%" }}
+          >
+            {product.category}
+          </Typography>
         </CardContent>
         <CardMedia
           component="img"
-          style={{ width: "100%", height: "180px" }}
+          style={{ width: "100%", height: "180px", marginTop: "-10px" }}
           image={product.photos[0]}
           title={product.name}
         />
       </CardActionArea>
       <CardActions>
         <Button
+          style={{ fontWeight: "bold", marginTop: "-5px", width: "50%" }}
           size="small"
           color="primary"
           onClick={() => {
@@ -70,6 +85,7 @@ function ProductCardMaterial(props) {
           Detalhes
         </Button>
         <Button
+          style={{ fontWeight: "bold", marginTop: "-5px" }}
           size="small"
           color="primary"
           onClick={() => {

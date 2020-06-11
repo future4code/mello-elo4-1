@@ -33,7 +33,9 @@ export const ProductsContainer = styled.div`
   min-height: 100%;
 `;
 
-export const Category = styled.div`
- margin-top: 5px;
+export const Category = styled.p`
+ margin-top: 10px;
+ margin-bottom: 0px;
+ font-size: 17px;
  cursor: pointer;
 `

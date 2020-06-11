@@ -33,14 +33,24 @@ function ProductCardMaterial(props) {
         }}
       >
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h7"
-            component="h3"
-            style={{ marginBottom: "0px", marginTop: "0px" }}
-          >
-            {product.name}
-          </Typography>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              gutterBottom
+              variant="h7"
+              component="h3"
+              style={{ marginBottom: "0px", marginTop: "0px" }}
+            >
+              {product.name}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h7"
+              component="h3"
+              style={{ marginBottom: "0px", marginTop: "0px" }}
+            >
+              {`R$ ${product.price.toFixed(2)}`}
+            </Typography>
+          </div>
         </CardContent>
         <CardMedia
           component="img"

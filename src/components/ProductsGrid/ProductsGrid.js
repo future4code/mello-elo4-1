@@ -10,6 +10,7 @@ import {
 } from "./styled";
 import ProductCardMaterial from "../ProductCardMaterial/ProductCardMaterial";
 
+
 function ProductsGrid(props) {
   const {
     products,

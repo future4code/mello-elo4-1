@@ -6,6 +6,7 @@ export const MainContainer = styled.div`
   display: flex;
   justify-content: space-around;
   height: 200px;
+  opacity: 70%;
 `;
 
 export const ListItemFooter = styled.li`
@@ -31,4 +32,8 @@ export const SocialMediaContainer = styled.div`
 
 export const ListFooter = styled.ul`
   width: 100%;
+`;
+
+export const H4 = styled.h4`
+  margin-bottom: 5px;
 `;

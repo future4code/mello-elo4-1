@@ -1,6 +1,5 @@
 import React from "react";
 import { MainContainer } from "./styled";
-import axios from "axios";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 

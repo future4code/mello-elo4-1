@@ -21,11 +21,9 @@ export const HyperlinkContainer = styled.div`
 export const SectionLink = styled.a`
   text-decoration: none;
   color: #584da8;
-
   &:visited {
     color: #584da8;
   }
-
   &:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -72,7 +70,6 @@ export const Product = styled.div`
   border-top: none;
   border-right: none;
   border-left: none;
-
   &:hover {
     transition-duration: 300ms;
     color: #584da8;
@@ -90,7 +87,6 @@ export const ProductParagraph = styled.p`
   display: flex;
   width: 80%;
   justify-content: flex-start;
-
   &:hover {
     transition-duration: 300ms;
     color: #584da8;
@@ -102,7 +98,6 @@ export const AddToCartButton = styled.p`
   display: flex;
   width: 100%;
   justify-content: center;
-
   &:hover {
     transition-duration: 300ms;
     color: #584da8;

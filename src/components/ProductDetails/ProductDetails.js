@@ -1,25 +1,31 @@
 import React from "react";
 import {
   MainContainer,
-  Sidebar,
-  ProductContainer,
-  Product,
-  DetailsContainer,
-  ProductParagraph,
-  ProductImage,
-  DescriptionContainer,
+  ProductName,
   HyperlinkContainer,
   SectionLink,
+  DetailsContainer,
+  ProductContainer,
+  ProductImage,
+  Sidebar,
+  Product,
+  PriceParagraph,
+  ProductParagraph,
+  AddToCartButton,
+  ProductDescriptionHeader,
+  DescriptionContainer,
+  ProductDescription,
 } from "./styled";
 
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
+import Arrow from "@material-ui/icons/KeyboardArrowRight";
 import Category from "@material-ui/icons/Category";
 import LocalOffer from "@material-ui/icons/LocalOffer";
 import Payments from "@material-ui/icons/Payment";
 import Money from "@material-ui/icons/AttachMoney";
 import Installments from "@material-ui/icons/ShopTwo";
-import Arrow from "@material-ui/icons/KeyboardArrowRight";
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -33,67 +39,111 @@ const mainTheme = createMuiTheme({
 });
 
 function ProductDetails(props) {
-  const { product, changePage, setCategory } = props;
+  const { product, changePage, setCategory, addProductToCart } = props;
+
+  const productDescription = product.description;
+
+  // Evita que o layout quebre caso o usuário coloque uma descrição muito grande.
+  function descriptionLengthLimiter() {
+    let productDescriptionLength = productDescription.length;
+
+    if (productDescriptionLength > 140) {
+      let slicedProductDescription = productDescription.slice(0, 140);
+      let slicedProductDescription2 = productDescription.slice(140, 298);
+      return (
+        <div>
+          <ProductDescription>{slicedProductDescription}</ProductDescription>
+          <ProductDescription>{slicedProductDescription2}</ProductDescription>
+        </div>
+      );
+    }
+  }
+
+  function showDialog() {
+    alert(`Produto "${product.name}" adicionado ao carrinho!`);
+  }
 
   return (
     product && (
-      <MainContainer>
-        <h1>{product.name}</h1>
-        <HyperlinkContainer>
-          <SectionLink onClick={() => changePage("productsGrid")}>
-            Página inicial
-          </SectionLink>{" "}
-          <Arrow />{" "}
-          <SectionLink
-            onClick={() => {
-              setCategory(product.category);
-              changePage("productsGrid");
-            }}
-          >
-            {product.category}
-          </SectionLink>{" "}
-          <Arrow /> <SectionLink>{product.name}</SectionLink>
-        </HyperlinkContainer>
-        <DetailsContainer>
-          <ProductContainer>
-            <ProductImage src={product.photos[0]} alt={`Imagem do produto ${product.name}`} />
-          </ProductContainer>
-          <Sidebar>
-            <Product>
-              <ProductParagraph>
+      <MuiThemeProvider theme={mainTheme}>
+        <MainContainer>
+          <ProductName>{product.name}</ProductName>
+          <HyperlinkContainer>
+            <SectionLink onClick={() => changePage("productsGrid")}>
+              Página inicial
+            </SectionLink>{" "}
+            <Arrow />{" "}
+            <SectionLink
+              onClick={() => {
+                setCategory(product.category);
+                changePage("productsGrid");
+              }}
+            >
+              {product.category}
+            </SectionLink>{" "}
+            <Arrow /> <SectionLink>{product.name}</SectionLink>
+          </HyperlinkContainer>
+          <DetailsContainer>
+            <ProductContainer>
+              <ProductImage
+                src={product.photos[0]}
+                alt={`Imagem do produto ${product.name}`}
+              />
+            </ProductContainer>
+            <Sidebar>
+              <Product>
+                <PriceParagraph>{`R$ ${product.price.toLocaleString("pt-BR", {
+                  minimumFractionDigits: 2,
+                })}`}</PriceParagraph>
+              </Product>
+
+              <Product>
                 <Category />
-                {product.category}
-              </ProductParagraph>
-            </Product>
-            <Product>
-              <ProductParagraph>
-                <LocalOffer />
-                {product.name}
-              </ProductParagraph>
-            </Product>
-            <Product>
-              <ProductParagraph>
-                <Money />
-                R${product.price}
-              </ProductParagraph>
-            </Product>
-            <Product>
-              <ProductParagraph>
+                <ProductParagraph>{product.category}</ProductParagraph>
+              </Product>
+
+              <Product>
                 <Payments />
-                Método de pagamento: {product.paymentMethod}
-              </ProductParagraph>
-            </Product>
-            <Product>
-              <ProductParagraph>
+                <ProductParagraph>
+                  Método de pagamento: {product.paymentMethod}
+                </ProductParagraph>
+              </Product>
+              <Product>
                 <Installments />
-                Parcelado em {product.installments} vezes.
-              </ProductParagraph>
-            </Product>
-          </Sidebar>
-        </DetailsContainer>
-        <h3>Informações do produto</h3>
-        <DescriptionContainer>{product.description}</DescriptionContainer>
-      </MainContainer>
+                <ProductParagraph>
+                  Parcelado em até {product.installments} vezes no cartão Elo4
+                </ProductParagraph>
+              </Product>
+              <Product>
+                <AddToCartButton>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    style={{ width: "90%", height: "80%" }}
+                    onClick={() => {
+                      addProductToCart(product);
+                      showDialog();
+                    }}
+                  >
+                    Adicionar ao carrinho
+                  </Button>
+                </AddToCartButton>
+              </Product>
+            </Sidebar>
+          </DetailsContainer>
+          <ProductDescriptionHeader>
+            Informações do produto
+          </ProductDescriptionHeader>
+          <DescriptionContainer>
+            <ProductDescription>{product.description}</ProductDescription>
+            <ProductDescription>{product.description}</ProductDescription>
+            <ProductDescription>{product.description}</ProductDescription>
+            <ProductDescription>{product.description}</ProductDescription>
+            {descriptionLengthLimiter()}
+          </DescriptionContainer>
+        </MainContainer>
+      </MuiThemeProvider>
     )
   );
 }

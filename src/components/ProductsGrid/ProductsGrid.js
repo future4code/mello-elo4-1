@@ -9,8 +9,6 @@ import {
   ProductsContainer,
 } from "./styled";
 
-
-
 function ProductsGrid(props) {
   const {
     products,

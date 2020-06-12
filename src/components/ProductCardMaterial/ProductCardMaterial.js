@@ -66,7 +66,7 @@ function ProductCardMaterial(props) {
               component="h4"
               style={{ marginBottom: "0px", marginTop: "0px" }}
             >
-              {`R$ ${product.price.toFixed(2)}`}
+              {`R$ ${parseFloat(product.price).toFixed(2)}`}
             </Typography>
             <Typography
               gutterBottom

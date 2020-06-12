@@ -27,29 +27,40 @@ function ProductCardMaterial(props) {
 
   return (
     <Card
+      elevation={7}
       style={{
         width: "250px",
-        height: "300px",
+        height: "350px",
         marginTop: "15px",
         marginRight: "15px",
       }}
     >
-      <CardActionArea
-        onClick={() => {
-          showProductDetails(product);
-        }}
-      >
-        <CardContent>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ height: "290px" }}>
+        <CardActionArea
+          onClick={() => {
+            showProductDetails(product);
+          }}
+        >
+          <CardMedia
+            style={{ width: "100%", height: "180px" }}
+            image={product.photos[0]}
+            title={product.name}
+          />
+          <CardContent>
             <Typography
               gutterBottom
               variant="inherit"
               component="h3"
-              style={{ marginBottom: "0px", marginTop: "0px" }}
+              style={{
+                marginBottom: "0px",
+                marginTop: "0px",
+                wordWrap: "break-word",
+              }}
             >
               {product.name}
             </Typography>
             <Typography
+              style={{ width: "30%" }}
               gutterBottom
               variant="inherit"
               component="h4"
@@ -57,22 +68,21 @@ function ProductCardMaterial(props) {
             >
               {`R$ ${product.price.toFixed(2)}`}
             </Typography>
-          </div>
-          <Typography
-            gutterBottom
-            variant="subtitle2"
-            style={{ marginBottom: "0px", marginTop: "0px", opacity: "70%" }}
-          >
-            {product.category}
-          </Typography>
-        </CardContent>
-        <CardMedia
-          component="img"
-          style={{ width: "100%", height: "180px", marginTop: "-10px" }}
-          image={product.photos[0]}
-          title={product.name}
-        />
-      </CardActionArea>
+            <Typography
+              gutterBottom
+              variant="subtitle2"
+              style={{
+                marginBottom: "0px",
+                marginTop: "0px",
+                opacity: "70%",
+                wordWrap: "break-word",
+              }}
+            >
+              {product.category}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </div>
       <CardActions>
         <Button
           style={{ fontWeight: "bold", marginTop: "-5px", width: "50%" }}

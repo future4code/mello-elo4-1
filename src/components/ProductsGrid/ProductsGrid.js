@@ -15,8 +15,8 @@ function ProductsGrid(props) {
   const {
     products,
     setCategory,
-    setMinPrice,
-    setMaxPrice,
+    setMinParent,
+    setMaxParent,
     defaultMaxPrice,
     defaultMinPrice,
     setSort,
@@ -25,23 +25,26 @@ function ProductsGrid(props) {
     addProductToCart,
   } = props;
 
-  const [defaultMax, setMax] = useState(1);
-  function setDefaultMax(event) {
-    setMax(event.target.value);
-    setMaxPrice(event.target.value);
-  }
+  const [maxInput, setMaxInput] = useState(1);
   useEffect(() => {
-    setMax(defaultMaxPrice);
+    setMaxInput(defaultMaxPrice);
   }, [defaultMaxPrice]);
 
-  const [defaultMin, setMin] = useState(1);
-  function setDefaultMin(event) {
-    setMin(event.target.value);
-    setMinPrice(event.target.value);
+  function setMaxPrice(event) {
+    setMaxInput(event.target.value);
+    setMaxParent(event.target.value);
   }
+
+  const [minInput, setMinInput] = useState(1);
   useEffect(() => {
-    setMin(defaultMinPrice);
+    setMinInput(defaultMinPrice);
   }, [defaultMinPrice]);
+  
+  function setMinPrice(event) {
+    setMinInput(event.target.value);
+    setMinParent(event.target.value);
+  }
+
 
   const renderedProducts = products.map((item) => {
     return (
@@ -82,17 +85,17 @@ function ProductsGrid(props) {
           style={{ width: "100px" }}
           label="Valor mínimo"
           type="number"
-          value={defaultMin}
-          inputProps={{ min: defaultMinPrice, max: defaultMax, step: "1" }}
-          onChange={setDefaultMin}
+          value={minInput}
+          inputProps={{ min: defaultMinPrice, max: maxInput, step: "1" }}
+          onChange={setMinPrice}
         />
         <TextField
           style={{ width: "100px" }}
           label="Valor máximo"
           type="number"
-          value={defaultMax}
-          inputProps={{ min: defaultMin, max: defaultMaxPrice, step: "1" }}
-          onChange={setDefaultMax}
+          value={maxInput}
+          inputProps={{ min: minInput, max: defaultMaxPrice, step: "1" }}
+          onChange={setMaxPrice}
         />
         {renderedCategories}
         <Category
@@ -127,9 +130,7 @@ function ProductsGrid(props) {
             <option value="categoryDec">Categoria Z-A</option>
           </select>
         </SelectContainer>
-        <Scroll>
           <ProductsContainer>{renderedProducts}</ProductsContainer>
-        </Scroll>
       </div>
     </MainContainer>
   );

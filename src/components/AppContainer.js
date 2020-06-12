@@ -159,8 +159,8 @@ export class AppContainer extends Component {
           <ProductsGrid
             products={this.filterSearchSortProducts()}
             setCategory={this.setCategory}
-            setMinPrice={this.setMinPrice}
-            setMaxPrice={this.setMaxPrice}
+            setMinParent={this.setMinPrice}
+            setMaxParent={this.setMaxPrice}
             defaultMaxPrice={defaultMaxPrice}
             defaultMinPrice={defaultMinPrice}
             setSort={this.setSortOption}

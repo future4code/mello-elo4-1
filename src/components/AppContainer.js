@@ -26,7 +26,7 @@ let defaultMinPrice = 0;
 
 export class AppContainer extends Component {
   state = {
-    displayPage: "productsGrid", // Opcoes: login, productGrid, productDetail, cart, supplierList, addProduct
+    displayPage: "login", // Opcoes: login, productGrid, productDetail, cart, supplierList, addProduct
     products: [],
     cart: [],
     category: "",
@@ -206,7 +206,7 @@ export class AppContainer extends Component {
     this.setState({ displayPage: e.target.value });
   };
   selectTest = (
-    <select defaultValue={"productsGrid"} onChange={this.handleSelecTest}>
+    <select defaultValue={"login"} onChange={this.handleSelecTest}>
       <option value="login">login</option>
       <option value="productsGrid">productsGrid</option>
       <option value="productDetails">productDetails</option>

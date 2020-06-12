@@ -40,7 +40,7 @@ function LoginPage(props) {
             variant="contained"
             color="secondary"
             size="large"
-            onClick={() => changePage("addProducts")}
+            onClick={() => changePage("addProduct")}
           >
             <SupplierIcon />
             Fornecedor

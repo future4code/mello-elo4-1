@@ -66,7 +66,11 @@ export class AppContainer extends Component {
   };
 
   changePage = (page) => {
-    this.setState({ displayPage: page });
+    if (this.state.displayPage === "cart" && page === "cart") {
+      this.setState({ displayPage: "productsGrid" });
+    } else {
+      this.setState({ displayPage: page });
+    }
   };
 
   setCategory = (name) => {
@@ -195,38 +199,24 @@ export class AppContainer extends Component {
       this.state.displayPage === "productDetails" ||
       this.state.displayPage === "cart"
     ) {
-      return <HeaderSearch setSearchInput={this.setSearchInput} />;
+      return (
+        <HeaderSearch
+          setSearchInput={this.setSearchInput}
+          changePage={this.changePage}
+        />
+      );
     } else {
       return <HeaderLogo />;
     }
   };
 
-  // Isso eh soh para mudarmos de pagina no teste, vai ser excluido
-  handleSelecTest = (e) => {
-    this.setState({ displayPage: e.target.value });
-  };
-  selectTest = (
-    <select defaultValue={"login"} onChange={this.handleSelecTest}>
-      <option value="login">login</option>
-      <option value="productsGrid">productsGrid</option>
-      <option value="productDetails">productDetails</option>
-      <option value="cart">cart</option>
-      <option value="addProduct">addProduct</option>
-    </select>
-  );
-
   render() {
     return (
-      // as duas linhas abaixo sao para teste e serao apagadas
-      <div>
-        {this.selectTest}
-        <MainContainer>
-          {this.renderHeader()}
-          {this.renderComponent()}
-          <Footer />
-        </MainContainer>
-      </div>
-      // a linha acima tbm eh do selectTest
+      <MainContainer>
+        {this.renderHeader()}
+        {this.renderComponent()}
+        <Footer />
+      </MainContainer>
     );
   }
 }

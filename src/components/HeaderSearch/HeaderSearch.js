@@ -51,7 +51,7 @@ function HeaderSeach(props) {
       <div className={classes.root}>
         <Grid container spacing={12}>
           <Grid item xs={4}>
-            <HeaderLogo src="https://files.slack.com/files-tmb/TLAVDH7C2-F0153ASNQKC-2ebeaa58c2/logo_480.png" />
+            <HeaderLogo src="https://trello-attachments.s3.amazonaws.com/5ee39ce81f2d0a0b33b519f5/480x480/33e1bcc413886d1aa16811d8aa04c305/logo_480.png" />
           </Grid>
           <Grid item xs={4}>
             <SearchIcon className={classes.searchIcon} />

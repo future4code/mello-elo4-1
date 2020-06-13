@@ -30,7 +30,7 @@ function ProductsGrid(props) {
     setMaxInput(defaultMaxPrice);
   }, [defaultMaxPrice]);
 
-  function setMaxPrice(event) {
+  function onChangeMaxInput(event) {
     setMaxInput(event.target.value);
     setMaxParent(event.target.value);
   }
@@ -40,7 +40,7 @@ function ProductsGrid(props) {
     setMinInput(defaultMinPrice);
   }, [defaultMinPrice]);
   
-  function setMinPrice(event) {
+  function onChangeMinInput(event) {
     setMinInput(event.target.value);
     setMinParent(event.target.value);
   }
@@ -87,7 +87,7 @@ function ProductsGrid(props) {
           type="number"
           value={minInput}
           inputProps={{ min: defaultMinPrice, max: maxInput, step: "1" }}
-          onChange={setMinPrice}
+          onChange={onChangeMinInput}
         />
         <TextField
           style={{ width: "100px" }}
@@ -95,7 +95,7 @@ function ProductsGrid(props) {
           type="number"
           value={maxInput}
           inputProps={{ min: minInput, max: defaultMaxPrice, step: "1" }}
-          onChange={setMaxPrice}
+          onChange={onChangeMaxInput}
         />
         {renderedCategories}
         <Category

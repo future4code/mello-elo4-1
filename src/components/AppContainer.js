@@ -39,6 +39,16 @@ export class AppContainer extends Component {
   getAllProducts = async () => {
     try {
       const response = await axios.get(urlElo4);
+      defaultMaxPrice = 0;
+      response.data.products.forEach((item) => {
+        defaultMaxPrice =
+          item.price > defaultMaxPrice ? item.price : defaultMaxPrice;
+      });
+      defaultMinPrice = defaultMaxPrice;
+      response.data.products.forEach((item) => {
+        defaultMinPrice =
+          item.price < defaultMinPrice ? item.price : defaultMinPrice;
+      });
       this.setState({
         products: response.data.products,
       });
@@ -145,16 +155,6 @@ export class AppContainer extends Component {
     if (this.state.sortOption === "priceDec") {
       filteredProducts.sort((a, b) => b.price - a.price);
     }
-    defaultMaxPrice = 0;
-    filteredProducts.forEach((item) => {
-      defaultMaxPrice =
-        item.price > defaultMaxPrice ? item.price : defaultMaxPrice;
-    });
-    defaultMinPrice = defaultMaxPrice;
-    filteredProducts.forEach((item) => {
-      defaultMinPrice =
-        item.price < defaultMinPrice ? item.price : defaultMinPrice;
-    });
     return filteredProducts;
   };
 

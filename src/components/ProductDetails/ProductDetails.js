@@ -137,9 +137,6 @@ function ProductDetails(props) {
           </ProductDescriptionHeader>
           <DescriptionContainer>
             <ProductDescription>{product.description}</ProductDescription>
-            <ProductDescription>{product.description}</ProductDescription>
-            <ProductDescription>{product.description}</ProductDescription>
-            <ProductDescription>{product.description}</ProductDescription>
             {descriptionLengthLimiter()}
           </DescriptionContainer>
         </MainContainer>

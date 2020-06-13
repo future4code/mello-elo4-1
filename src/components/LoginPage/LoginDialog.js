@@ -31,7 +31,7 @@ function LoginDialog(props) {
     <>
       <MainContainerLogin>
         <HeaderText>Bem-vindo à Elo4</HeaderText>
-        <h2>Logar como:</h2>
+        <h2>Entrar como:</h2>
         <ButtonsContainer>
           <Button
             variant="contained"

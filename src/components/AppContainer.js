@@ -67,7 +67,11 @@ export class AppContainer extends Component {
 
   changePage = (page) => {
     if (this.state.displayPage === "cart" && page === "cart") {
-      this.setState({ displayPage: "productsGrid" });
+      if (this.state.selectedProduct) {
+        this.setState({ displayPage: "productDetails" });
+      } else {
+        this.setState({ displayPage: "productsGrid" });
+      }
     } else {
       this.setState({ displayPage: page });
     }
@@ -180,6 +184,7 @@ export class AppContainer extends Component {
             changePage={this.changePage}
             setCategory={this.setCategory}
             addProductToCart={this.addProductToCart}
+            setSelectedProduct={this.setSelectedProduct}
           />
         );
       case "cart":

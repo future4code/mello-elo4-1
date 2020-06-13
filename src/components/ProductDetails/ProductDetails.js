@@ -39,7 +39,13 @@ const mainTheme = createMuiTheme({
 });
 
 function ProductDetails(props) {
-  const { product, changePage, setCategory, addProductToCart } = props;
+  const {
+    product,
+    changePage,
+    setCategory,
+    addProductToCart,
+    setSelectedProduct,
+  } = props;
 
   const productDescription = product.description;
 
@@ -63,85 +69,91 @@ function ProductDetails(props) {
     alert(`Produto "${product.name}" adicionado ao carrinho!`);
   }
 
-  return (
-    product && (
-      <MuiThemeProvider theme={mainTheme}>
-        <MainContainer>
-          <ProductName>{product.name}</ProductName>
-          <HyperlinkContainer>
-            <SectionLink onClick={() => changePage("productsGrid")}>
-              Página inicial
-            </SectionLink>{" "}
-            <Arrow />{" "}
-            <SectionLink
-              onClick={() => {
-                setCategory(product.category);
-                changePage("productsGrid");
-              }}
-            >
-              {product.category}
-            </SectionLink>{" "}
-            <Arrow /> <SectionLink>{product.name}</SectionLink>
-          </HyperlinkContainer>
-          <DetailsContainer>
-            <ProductContainer>
-              <ProductImage
-                src={product.photos[0]}
-                alt={`Imagem do produto ${product.name}`}
-              />
-            </ProductContainer>
-            <Sidebar>
-              <Product>
-                <PriceParagraph>{`R$ ${product.price.toLocaleString("pt-BR", {
-                  minimumFractionDigits: 2,
-                })}`}</PriceParagraph>
-              </Product>
+  return product ? (
+    <MuiThemeProvider theme={mainTheme}>
+      <MainContainer>
+        <ProductName>{product.name}</ProductName>
+        <HyperlinkContainer>
+          <SectionLink
+            onClick={() => {
+              changePage("productsGrid");
+              setSelectedProduct(undefined);
+            }}
+          >
+            Página inicial
+          </SectionLink>{" "}
+          <Arrow />{" "}
+          <SectionLink
+            onClick={() => {
+              setCategory(product.category);
+              changePage("productsGrid");
+              setSelectedProduct(undefined);
+            }}
+          >
+            {product.category}
+          </SectionLink>{" "}
+          <Arrow /> <SectionLink>{product.name}</SectionLink>
+        </HyperlinkContainer>
+        <DetailsContainer>
+          <ProductContainer>
+            <ProductImage
+              src={product.photos[0]}
+              alt={`Imagem do produto ${product.name}`}
+            />
+          </ProductContainer>
+          <Sidebar>
+            <Product>
+              <PriceParagraph>{`R$ ${product.price.toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+              })}`}</PriceParagraph>
+            </Product>
 
-              <Product>
-                <Category />
-                <ProductParagraph>{product.category}</ProductParagraph>
-              </Product>
+            <Product>
+              <Category />
+              <ProductParagraph>{product.category}</ProductParagraph>
+            </Product>
 
-              <Product>
-                <Payments />
-                <ProductParagraph>
-                  Método de pagamento: {product.paymentMethod}
-                </ProductParagraph>
-              </Product>
-              <Product>
-                <Installments />
-                <ProductParagraph>
-                  Parcelado em até {product.installments} vezes no cartão Elo4
-                </ProductParagraph>
-              </Product>
-              <Product>
-                <AddToCartButton>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    style={{ width: "90%", height: "80%" }}
-                    onClick={() => {
-                      addProductToCart(product);
-                      showDialog();
-                    }}
-                  >
-                    Adicionar ao carrinho
-                  </Button>
-                </AddToCartButton>
-              </Product>
-            </Sidebar>
-          </DetailsContainer>
-          <ProductDescriptionHeader>
-            Informações do produto
-          </ProductDescriptionHeader>
-          <DescriptionContainer>
-            <ProductDescription>{product.description}</ProductDescription>
-            {descriptionLengthLimiter()}
-          </DescriptionContainer>
-        </MainContainer>
-      </MuiThemeProvider>
-    )
+            <Product>
+              <Payments />
+              <ProductParagraph>
+                Método de pagamento: {product.paymentMethod}
+              </ProductParagraph>
+            </Product>
+            <Product>
+              <Installments />
+              <ProductParagraph>
+                Parcelado em até {product.installments} vezes no cartão Elo4
+              </ProductParagraph>
+            </Product>
+            <Product>
+              <AddToCartButton>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  style={{ width: "90%", height: "80%" }}
+                  onClick={() => {
+                    addProductToCart(product);
+                    showDialog();
+                  }}
+                >
+                  Adicionar ao carrinho
+                </Button>
+              </AddToCartButton>
+            </Product>
+          </Sidebar>
+        </DetailsContainer>
+        <ProductDescriptionHeader>
+          Informações do produto
+        </ProductDescriptionHeader>
+        <DescriptionContainer>
+          <ProductDescription>{product.description}</ProductDescription>
+          {descriptionLengthLimiter()}
+        </DescriptionContainer>
+      </MainContainer>
+    </MuiThemeProvider>
+  ) : (
+    <p>Erro nenhum produto selecionado</p>
   );
 }
 

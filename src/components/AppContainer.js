@@ -21,8 +21,7 @@ const MainContainer = styled.div`
   gap: 10px;
 `;
 
-let defaultMaxPrice = 0;
-let defaultMinPrice = 0;
+let defaultMaxPrice, defaultMinPrice;
 
 export class AppContainer extends Component {
   state = {
@@ -40,15 +39,6 @@ export class AppContainer extends Component {
   getAllProducts = async () => {
     try {
       const response = await axios.get(urlElo4);
-      response.data.products.forEach((item) => {
-        defaultMaxPrice =
-          item.price > defaultMaxPrice ? item.price : defaultMaxPrice;
-      });
-      defaultMinPrice = defaultMaxPrice;
-      response.data.products.forEach((item) => {
-        defaultMinPrice =
-          item.price < defaultMinPrice ? item.price : defaultMinPrice;
-      });
       this.setState({
         products: response.data.products,
       });
@@ -155,6 +145,16 @@ export class AppContainer extends Component {
     if (this.state.sortOption === "priceDec") {
       filteredProducts.sort((a, b) => b.price - a.price);
     }
+    defaultMaxPrice = 0;
+    filteredProducts.forEach((item) => {
+      defaultMaxPrice =
+        item.price > defaultMaxPrice ? item.price : defaultMaxPrice;
+    });
+    defaultMinPrice = defaultMaxPrice;
+    filteredProducts.forEach((item) => {
+      defaultMinPrice =
+        item.price < defaultMinPrice ? item.price : defaultMinPrice;
+    });
     return filteredProducts;
   };
 

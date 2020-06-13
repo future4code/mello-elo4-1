@@ -1,6 +1,7 @@
 import React from "react";
+import LoginDialog from "./LoginDialog";
 
-import { MainContainer, HeaderText, ButtonsContainer } from "./styled";
+import { MainContainer } from "./styled";
 
 import Button from "@material-ui/core/Button";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
@@ -25,27 +26,7 @@ function LoginPage(props) {
   return (
     <MuiThemeProvider theme={mainTheme}>
       <MainContainer>
-        <HeaderText>Bem-vindo à Elo4</HeaderText>
-        <ButtonsContainer>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={() => changePage("productsGrid")}
-          >
-            <UserIcon />
-            Consumidor
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            onClick={() => changePage("addProduct")}
-          >
-            <SupplierIcon />
-            Fornecedor
-          </Button>
-        </ButtonsContainer>
+        <LoginDialog changeLoginPage={changePage} />
       </MainContainer>
     </MuiThemeProvider>
   );

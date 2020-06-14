@@ -61,8 +61,8 @@ export class AppContainer extends Component {
     this.getAllProducts();
   }
 
-  removeFromCart = (id, removeAll, name, amount) => {
-    let newCart = this.state.cart;
+  removeFromCart = (id, removeAll) => {
+    let newCart = this.state.cart.reverse();
     if (removeAll) {
       newCart = newCart.filter((product) => product.id !== id);
     } else {
@@ -70,9 +70,8 @@ export class AppContainer extends Component {
         newCart.findIndex((item) => item.id === id),
         1
       );
-      console.log(newCart);
     }
-    this.setState({ cart: newCart });
+    this.setState({ cart: newCart.reverse() });
   };
 
   changePage = (page) => {

@@ -60,6 +60,7 @@ function HeaderSeach(props) {
               placeholder="Pesquisa"
               onChange={(e) => {
                 setSearchInput(e.target.value);
+                changePage("productsGrid")
               }}
             />
             <Button className={classes.Button}>Pesquisar</Button>

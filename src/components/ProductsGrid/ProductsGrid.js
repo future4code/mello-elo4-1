@@ -10,7 +10,6 @@ import {
 } from "./styled";
 import ProductCardMaterial from "../ProductCardMaterial/ProductCardMaterial";
 
-
 function ProductsGrid(props) {
   const {
     products,
@@ -39,12 +38,11 @@ function ProductsGrid(props) {
   useEffect(() => {
     setMinInput(defaultMinPrice);
   }, [defaultMinPrice]);
-  
+
   function onChangeMinInput(event) {
     setMinInput(event.target.value);
     setMinParent(event.target.value);
   }
-
 
   const renderedProducts = products.map((item) => {
     return (
@@ -97,6 +95,9 @@ function ProductsGrid(props) {
           inputProps={{ min: minInput, max: defaultMaxPrice, step: "1" }}
           onChange={onChangeMaxInput}
         />
+        <Category style={{ fontWeight: "bold", cursor: "default" }}>
+          Categorias:
+        </Category>
         {renderedCategories}
         <Category
           onClick={() => {
@@ -130,7 +131,7 @@ function ProductsGrid(props) {
             <option value="categoryDec">Categoria Z-A</option>
           </select>
         </SelectContainer>
-          <ProductsContainer>{renderedProducts}</ProductsContainer>
+        <ProductsContainer>{renderedProducts}</ProductsContainer>
       </div>
     </MainContainer>
   );

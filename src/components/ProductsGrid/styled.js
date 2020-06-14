@@ -22,10 +22,6 @@ export const SelectContainer = styled.div`
   align-items: center;
 `;
 
-export const Scroll = styled.div`
-  overflow: auto;
-`;
-
 export const ProductsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -34,8 +30,8 @@ export const ProductsContainer = styled.div`
 `;
 
 export const Category = styled.p`
- margin-top: 10px;
- margin-bottom: 0px;
- font-size: 17px;
- cursor: pointer;
-`
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-size: 17px;
+  cursor: pointer;
+`;

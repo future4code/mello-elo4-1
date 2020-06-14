@@ -1,40 +1,16 @@
 import React from "react";
-import { MainContainer } from "./styled";
-import Button from "@material-ui/core/Button";
-import styled from "styled-components";
-//Testes do Material UI
-import StyledCart from "./StyledCart";
-import StyledCart2 from "./StyledCart2";
-//Imports Do Material UI-GRID
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import { red } from "@material-ui/core/colors";
-
-const BackgroundColor = styled.div`
-  background-color: white;
-`;
-
-const ButtonColor = styled(Button)`
-  background-color: #584da8;
-  color: white;
-`;
-
-const ButtonColor2 = styled(Button)`
-  color: #584da8;
-`;
-
-const FlexCart = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const FlexTotal = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-`;
+import {
+  BackgroundColor,
+  ButtonColor,
+  ButtonColor2,
+  FlexCart,
+  FlexTotal,
+} from "./styled";
 
 const styles = (theme) => ({
   root: {
@@ -95,7 +71,7 @@ function Cart(props) {
   });
   //// Esquema do Material UI que se encontra no StyledCart
   const renderedCart = newListCart.map((product) => (
-    <div>
+    <div style={{ marginTop: "10px" }}>
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <Grid container spacing={16}>
@@ -115,7 +91,7 @@ function Cart(props) {
                     {product.name}
                   </Typography>
                   <Typography gutterBottom>
-                    Quantidade: X{product.amount}
+                    Quantidade: {product.amount}
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -132,6 +108,7 @@ function Cart(props) {
                     +
                   </ButtonColor>
                   <ButtonColor2
+                    style={{ marginLeft: "10px" }}
                     variant="outlined"
                     onClick={() => removeFromCart(product.id, true)}
                   >
@@ -141,10 +118,10 @@ function Cart(props) {
               </Grid>
               <Grid item>
                 <Typography variant="subtitle1">
-                  Preço Unitário:R${product.price}
+                  Preço Unitário: R${product.price.toFixed(2)}
                 </Typography>
                 <Typography variant="subtitle1">
-                  Preço Total:R${product.price * product.amount}
+                  Sub-total: R${(product.price * product.amount).toFixed(2)}
                 </Typography>
               </Grid>
             </Grid>
@@ -159,13 +136,12 @@ function Cart(props) {
       <div>
         <h1>Carrinho</h1>
         <FlexCart>{renderedCart}</FlexCart>
-        <hr />
         <FlexCart>
           <h3>
-            <span>Valor parcelado : R${total / parcelas}</span>
+            <span>Valor parcelado: R${(total / parcelas).toFixed(2)}</span>
           </h3>
           <h3>
-            <label>Número de Parcelas:</label>
+            <label>Número de Parcelas: </label>
             <span>
               <select onChange={mudarParcelas}>
                 <option>1</option>
@@ -178,6 +154,23 @@ function Cart(props) {
         </FlexCart>
 
         <FlexTotal>
+          <h1 style={{ display: "block" }}>
+            Total da Compra: R${total.toFixed(2)}
+          </h1>
+        </FlexTotal>
+        <FlexTotal>
+          <ButtonColor
+            size="large"
+            variant="contained"
+            style={{ marginLeft: "10px" }}
+            onClick={() => {
+              finishAlert(undefined);
+              changePage("productsGrid");
+              setStateCart();
+            }}
+          >
+            Finalizar Compra
+          </ButtonColor>
           <ButtonColor
             size="large"
             variant="contained"
@@ -187,18 +180,6 @@ function Cart(props) {
           >
             Continuar Comprando
           </ButtonColor>
-          <ButtonColor
-            size="large"
-            variant="contained"
-            onClick={() => {
-              finishAlert(undefined);
-              changePage("productsGrid");
-              setStateCart();
-            }}
-          >
-            Finalizar Compra
-          </ButtonColor>
-          <h1>Total da Compra:{total}</h1>
         </FlexTotal>
       </div>
     </BackgroundColor>
@@ -206,22 +187,3 @@ function Cart(props) {
 }
 // Esquema do Material UI que se encontra no StyledCart
 export default withStyles(styles)(Cart);
-
-/*Antigo código do MAP
-<p>
-      {product.name}&nbsp;X{product.amount}&nbsp;R$:{product.price}&nbsp;Foto:
-      <img
-        style={{ width: "300px", height: "200px" }}
-        src={product.photo}
-        alt={product.name}
-      ></img>
-      <br></br>
-      <ButtonColor
-        variant="contained"
-        onClick={() => removeFromCart(product.id)}
-      >
-        Excluir Produto
-      </ButtonColor>
-      <StyledCart />
-    </p>
-*/

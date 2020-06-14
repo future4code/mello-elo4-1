@@ -25,7 +25,7 @@ let defaultMaxPrice, defaultMinPrice;
 
 export class AppContainer extends Component {
   state = {
-    displayPage: "login", // Opcoes: login, productGrid, productDetail, cart, supplierList, addProduct
+    displayPage: "login", // Opcoes: login, productGrid, productDetail, cart, addProduct
     products: [],
     cart: [],
     category: "",

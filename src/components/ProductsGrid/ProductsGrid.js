@@ -3,7 +3,6 @@ import { TextField } from "@material-ui/core";
 import {
   MainContainer,
   CategoriesContainer,
-  Scroll,
   SelectContainer,
   ProductsContainer,
   Category,

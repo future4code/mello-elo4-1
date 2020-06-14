@@ -223,6 +223,7 @@ export class AppContainer extends Component {
             parcelas={this.state.parcelas}
             mudarParcelas={this.mudarParcelas}
             setStateCart={this.setStateCart}
+            setSelectedProduct={this.setSelectedProduct}
           />
         );
       case "addProduct":

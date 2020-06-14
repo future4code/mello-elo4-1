@@ -73,7 +73,7 @@ function HeaderSeach(props) {
               color="primary"
               classes={{ badge: classes.badge }}
             >
-              <ShoppingCartIcon onClick={()=>{changePage("cart")}}/>
+              <ShoppingCartIcon onClick={()=>{changePage("cart")}} style={{cursor:"pointer"}}/>
             </Badge>
           </Grid>
         </Grid>

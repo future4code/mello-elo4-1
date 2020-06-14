@@ -59,7 +59,18 @@ export class AppContainer extends Component {
   };
   componentDidMount() {
     this.getAllProducts();
+    const cartStr = localStorage.getItem("melloFourOneCart");
+    if (cartStr) {
+      const cartObj = JSON.parse(cartStr);
+      this.setState({ cart: cartObj });
+    }
   }
+
+  addProductToCart = (product) => {
+    const newCart = [...this.state.cart, product];
+    localStorage.setItem("melloFourOneCart", JSON.stringify(newCart));
+    this.setState({ cart: newCart });
+  };
 
   removeFromCart = (id, removeAll) => {
     let newCart = this.state.cart.reverse();
@@ -71,7 +82,9 @@ export class AppContainer extends Component {
         1
       );
     }
-    this.setState({ cart: newCart.reverse() });
+    newCart.reverse();
+    localStorage.setItem("melloFourOneCart", JSON.stringify(newCart));
+    this.setState({ cart: newCart });
   };
 
   changePage = (page) => {
@@ -108,11 +121,6 @@ export class AppContainer extends Component {
 
   setSelectedProduct = (product) => {
     this.setState({ selectedProduct: product });
-  };
-
-  addProductToCart = (product) => {
-    const newCart = [...this.state.cart, product];
-    this.setState({ cart: newCart });
   };
 
   mudarParcelas = (event) => {

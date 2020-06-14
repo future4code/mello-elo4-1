@@ -71,7 +71,7 @@ function Cart(props) {
   });
   //// Esquema do Material UI que se encontra no StyledCart
   const renderedCart = newListCart.map((product) => (
-    <div style={{ marginTop: "10px" }}>
+    <div key={product.id} style={{ marginTop: "10px" }}>
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <Grid container spacing={16}>
@@ -138,9 +138,6 @@ function Cart(props) {
         <FlexCart>{renderedCart}</FlexCart>
         <FlexCart>
           <h3>
-            <span>Valor parcelado: R${(total / parcelas).toFixed(2)}</span>
-          </h3>
-          <h3>
             <label>Número de Parcelas: </label>
             <span>
               <select onChange={mudarParcelas}>
@@ -150,6 +147,9 @@ function Cart(props) {
                 <option>4</option>
               </select>
             </span>
+          </h3>
+          <h3>
+            <span>Valor da parcela: R${(total / parcelas).toFixed(2)}</span>
           </h3>
         </FlexCart>
 

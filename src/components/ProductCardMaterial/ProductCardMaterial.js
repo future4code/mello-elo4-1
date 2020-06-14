@@ -38,32 +38,18 @@ function ProductCardMaterial(props) {
           />
           <CardContent>
             <Typography
-              gutterBottom
               variant="inherit"
               component="h3"
-              style={{
-                marginBottom: "0px",
-                marginTop: "0px",
-                wordWrap: "break-word",
-              }}
+              style={{ wordWrap: "break-word" }}
             >
               {product.name}
             </Typography>
-            <Typography
-              style={{ width: "30%" }}
-              gutterBottom
-              variant="inherit"
-              component="h4"
-              style={{ marginBottom: "0px", marginTop: "0px" }}
-            >
+            <Typography variant="inherit" component="h4">
               {`R$ ${parseFloat(product.price).toFixed(2)}`}
             </Typography>
             <Typography
-              gutterBottom
               variant="subtitle2"
               style={{
-                marginBottom: "0px",
-                marginTop: "0px",
                 opacity: "70%",
                 wordWrap: "break-word",
               }}

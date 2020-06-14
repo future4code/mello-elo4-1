@@ -121,14 +121,7 @@ function Cart(props) {
                 <Grid item>
                   <ButtonColor
                     variant="contained"
-                    onClick={() =>
-                      removeFromCart(
-                        product.id,
-                        Boolean(false),
-                        product.name,
-                        product.amount
-                      )
-                    }
+                    onClick={() => removeFromCart(product.id, false)}
                   >
                     -
                   </ButtonColor>
@@ -140,7 +133,7 @@ function Cart(props) {
                   </ButtonColor>
                   <ButtonColor2
                     variant="outlined"
-                    onClick={() => removeFromCart(product.id, Boolean(true))}
+                    onClick={() => removeFromCart(product.id, true)}
                   >
                     Excluir
                   </ButtonColor2>

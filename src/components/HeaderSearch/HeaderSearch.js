@@ -44,7 +44,13 @@ const styles = (theme) => ({
 });
 
 function HeaderSeach(props) {
-  const { setSearchInput, classes,changePage,setSelectedProduct } = props;
+  const {
+    setSearchInput,
+    classes,
+    changePage,
+    setSelectedProduct,
+    cartCounter,
+  } = props;
 
   return (
     <MainContainer>
@@ -60,8 +66,8 @@ function HeaderSeach(props) {
               placeholder="Pesquisa"
               onChange={(e) => {
                 setSearchInput(e.target.value);
-                changePage("productsGrid")
-                setSelectedProduct(undefined)
+                changePage("productsGrid");
+                setSelectedProduct(undefined);
               }}
             />
             <Button className={classes.Button}>Pesquisar</Button>
@@ -72,8 +78,14 @@ function HeaderSeach(props) {
               badgeContent={4}
               color="primary"
               classes={{ badge: classes.badge }}
+              badgeContent={cartCounter}
             >
-              <ShoppingCartIcon onClick={()=>{changePage("cart")}} style={{cursor:"pointer"}}/>
+              <ShoppingCartIcon
+                onClick={() => {
+                  changePage("cart");
+                }}
+                style={{ cursor: "pointer" }}
+              />
             </Badge>
           </Grid>
         </Grid>

@@ -244,6 +244,7 @@ export class AppContainer extends Component {
           setSearchInput={this.setSearchInput}
           changePage={this.changePage}
           setSelectedProduct={this.setSelectedProduct}
+          cartCounter={this.state.cart.length}
         />
       );
     } else {

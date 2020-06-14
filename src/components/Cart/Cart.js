@@ -65,6 +65,7 @@ function Cart(props) {
         photos: product.photos,
         amount: 1,
         description: product.description,
+        category: product.category,
       };
       newListCart.push(newProduct);
     } else {

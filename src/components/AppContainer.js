@@ -34,7 +34,7 @@ export class AppContainer extends Component {
     searchInput: "",
     selectedProduct: undefined,
     sortOption: "",
-    parcelas: 1,
+    installments: 1,
   };
 
   getAllProducts = async () => {
@@ -123,9 +123,9 @@ export class AppContainer extends Component {
     this.setState({ selectedProduct: product });
   };
 
-  mudarParcelas = (event) => {
-    const numeroParcelas = event.target.value;
-    this.setState({ parcelas: numeroParcelas });
+  changeInstallments = (event) => {
+    const numberInstallments = event.target.value;
+    this.setState({ installments: numberInstallments });
   };
 
   setStateCart = () => {
@@ -220,8 +220,8 @@ export class AppContainer extends Component {
             removeFromCart={this.removeFromCart}
             addProductToCart={this.addProductToCart}
             changePage={this.changePage}
-            parcelas={this.state.parcelas}
-            mudarParcelas={this.mudarParcelas}
+            installments={this.state.installments}
+            changeInstallments={this.changeInstallments}
             setStateCart={this.setStateCart}
             setSelectedProduct={this.setSelectedProduct}
           />

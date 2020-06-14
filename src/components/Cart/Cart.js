@@ -44,8 +44,8 @@ function Cart(props) {
     addProductToCart,
     classes,
     changePage,
-    parcelas,
-    mudarParcelas,
+    installments,
+    changeInstallments,
     setStateCart,
     setSelectedProduct,
   } = props;
@@ -149,7 +149,7 @@ function Cart(props) {
           <h3>
             <label>Número de Parcelas: </label>
             <span>
-              <select onChange={mudarParcelas}>
+              <select onChange={changeInstallments}>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -158,7 +158,7 @@ function Cart(props) {
             </span>
           </h3>
           <h3>
-            <span>Valor da parcela: R${(total / parcelas).toFixed(2)}</span>
+            <span>Valor da parcela: R${(total / installments).toFixed(2)}</span>
           </h3>
         </FlexCart>
 

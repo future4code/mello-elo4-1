@@ -34,6 +34,7 @@ export class AppContainer extends Component {
     searchInput: "",
     selectedProduct: undefined,
     sortOption: "",
+    parcelas: 1,
   };
 
   getAllProducts = async () => {
@@ -60,8 +61,17 @@ export class AppContainer extends Component {
     this.getAllProducts();
   }
 
-  removeFromCart = (id) => {
-    const newCart = this.state.cart.filter((product) => product.id !== id);
+  removeFromCart = (id, removeAll, name, amount) => {
+    let newCart = this.state.cart;
+    if (removeAll) {
+      newCart = newCart.filter((product) => product.id !== id);
+    } else {
+      newCart.splice(
+        newCart.findIndex((item) => item.id === id),
+        1
+      );
+      console.log(newCart);
+    }
     this.setState({ cart: newCart });
   };
 
@@ -104,6 +114,15 @@ export class AppContainer extends Component {
   addProductToCart = (product) => {
     const newCart = [...this.state.cart, product];
     this.setState({ cart: newCart });
+  };
+
+  mudarParcelas = (event) => {
+    const numeroParcelas = event.target.value;
+    this.setState({ parcelas: numeroParcelas });
+  };
+
+  setStateCart = () => {
+    this.setState({ cart: [] });
   };
 
   filterSearchSortProducts = () => {
@@ -189,7 +208,15 @@ export class AppContainer extends Component {
         );
       case "cart":
         return (
-          <Cart cart={this.state.cart} removeFromCart={this.removeFromCart} />
+          <Cart
+            cart={this.state.cart}
+            removeFromCart={this.removeFromCart}
+            addProductToCart={this.addProductToCart}
+            changePage={this.changePage}
+            parcelas={this.state.parcelas}
+            mudarParcelas={this.mudarParcelas}
+            setStateCart={this.setStateCart}
+          />
         );
       case "addProduct":
         return <AddProduct />;

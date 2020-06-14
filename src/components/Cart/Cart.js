@@ -14,7 +14,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import { red } from "@material-ui/core/colors";
 
 const BackgroundColor = styled.div`
-  background-color: #33525b;
+  background-color: white;
 `;
 
 const ButtonColor = styled(Button)`
@@ -22,11 +22,18 @@ const ButtonColor = styled(Button)`
   color: white;
 `;
 
-const GridTest = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
+const ButtonColor2 = styled(Button)`
+  color: #584da8;
+`;
+
+const FlexCart = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FlexTotal = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
 `;
 
 const styles = (theme) => ({
@@ -36,7 +43,7 @@ const styles = (theme) => ({
   paper: {
     padding: theme.spacing.unit * 2,
     margin: "auto",
-    maxWidth: 500,
+    maxWidth: "100%",
   },
   image: {
     width: 128,
@@ -55,10 +62,19 @@ function finishAlert() {
 }
 
 function Cart(props) {
-  const { cart, removeFromCart, classes } = props;
-
+  const {
+    cart,
+    removeFromCart,
+    addProductToCart,
+    classes,
+    changePage,
+    parcelas,
+    mudarParcelas,
+    setStateCart,
+  } = props;
   const newListCart = [];
   let total = 0;
+
   cart.forEach((product) => {
     total += product.price;
     const checkProduct = newListCart.findIndex(
@@ -69,7 +85,7 @@ function Cart(props) {
         id: product.id,
         name: product.name,
         price: product.price,
-        photo: product.photos,
+        photos: product.photos,
         amount: 1,
       };
       newListCart.push(newProduct);
@@ -88,7 +104,7 @@ function Cart(props) {
                 <img
                   className={classes.img}
                   alt={product.name}
-                  src={product.photo}
+                  src={product.photos}
                 />
               </ButtonBase>
             </Grid>
@@ -105,14 +121,38 @@ function Cart(props) {
                 <Grid item>
                   <ButtonColor
                     variant="contained"
-                    onClick={() => removeFromCart(product.id)}
+                    onClick={() =>
+                      removeFromCart(
+                        product.id,
+                        Boolean(false),
+                        product.name,
+                        product.amount
+                      )
+                    }
                   >
-                    Excluir Produto
+                    -
                   </ButtonColor>
+                  <ButtonColor
+                    variant="contained"
+                    onClick={() => addProductToCart(product)}
+                  >
+                    +
+                  </ButtonColor>
+                  <ButtonColor2
+                    variant="outlined"
+                    onClick={() => removeFromCart(product.id, Boolean(true))}
+                  >
+                    Excluir
+                  </ButtonColor2>
                 </Grid>
               </Grid>
               <Grid item>
-                <Typography variant="subtitle1">R$:{product.price}</Typography>
+                <Typography variant="subtitle1">
+                  Preço Unitário:R${product.price}
+                </Typography>
+                <Typography variant="subtitle1">
+                  Preço Total:R${product.price * product.amount}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -125,10 +165,48 @@ function Cart(props) {
     <BackgroundColor>
       <div>
         <h1>Carrinho</h1>
-        <GridTest>{renderedCart}</GridTest>
+        <FlexCart>{renderedCart}</FlexCart>
         <hr />
-        <h1>TOTAL:{total}</h1>
-        <ButtonColor onClick={finishAlert}>Finalizar Compra</ButtonColor>
+        <FlexCart>
+          <h3>
+            <span>Valor parcelado : R${total / parcelas}</span>
+          </h3>
+          <h3>
+            <label>Número de Parcelas:</label>
+            <span>
+              <select onChange={mudarParcelas}>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </span>
+          </h3>
+        </FlexCart>
+
+        <FlexTotal>
+          <ButtonColor
+            size="large"
+            variant="contained"
+            onClick={() => {
+              changePage("productsGrid");
+            }}
+          >
+            Continuar Comprando
+          </ButtonColor>
+          <ButtonColor
+            size="large"
+            variant="contained"
+            onClick={() => {
+              finishAlert(undefined);
+              changePage("productsGrid");
+              setStateCart();
+            }}
+          >
+            Finalizar Compra
+          </ButtonColor>
+          <h1>Total da Compra:{total}</h1>
+        </FlexTotal>
       </div>
     </BackgroundColor>
   );

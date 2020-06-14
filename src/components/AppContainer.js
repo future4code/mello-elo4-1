@@ -234,6 +234,7 @@ export class AppContainer extends Component {
         <HeaderSearch
           setSearchInput={this.setSearchInput}
           changePage={this.changePage}
+          setSelectedProduct={this.setSelectedProduct}
         />
       );
     } else {

@@ -44,7 +44,7 @@ const styles = (theme) => ({
 });
 
 function HeaderSeach(props) {
-  const { setSearchInput, classes,changePage } = props;
+  const { setSearchInput, classes,changePage,setSelectedProduct } = props;
 
   return (
     <MainContainer>
@@ -61,6 +61,7 @@ function HeaderSeach(props) {
               onChange={(e) => {
                 setSearchInput(e.target.value);
                 changePage("productsGrid")
+                setSelectedProduct(undefined)
               }}
             />
             <Button className={classes.Button}>Pesquisar</Button>
